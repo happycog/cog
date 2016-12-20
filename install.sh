@@ -1,6 +1,6 @@
 set -e
 
-INSTALL_FOLDER="$HOME/Desktop/cog"
+INSTALL_FOLDER="$HOME/.cog"
 INSTALL_URL="https://github.com/happycog/cog/archive/master.tar.gz"
 
 echo '📂  Creating cogfile directory'
