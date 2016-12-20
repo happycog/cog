@@ -8,6 +8,7 @@ rm -rf $INSTALL_FOLDER
 rm -rf /tmp/cog && mkdir /tmp/cog/
 curl -sL $INSTALL_URL | tar xz - -C /tmp/cog/
 mv /tmp/cog $INSTALL_FOLDER
+chmod +x $INSTALL_FOLDER/bin/*
 rm -rf /tmp/cog/
 echo '🔗  Creating a symbolic link to your bin'
 for f in ~/{.profile,.bash_profile}; do 
