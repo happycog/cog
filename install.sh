@@ -1,28 +1,27 @@
-installFolder="$HOME/Desktop/cog"
-installUrl="https://github.com/happycog/cogfile/archive/master.tgz"
+set -e
 
-# setup
-setup () {
-    # echo 'Checking if a cogfile exist locally 🤔...'
-    # echo ''
-    # if [ ! -d $installFolder ]; then
-        echo 'Creating cogfile directory 📂'
-        curl -s https://github.com/happycog/cogfile/archive/master.tar.gz | tar xvz - -C $installFolder
-        echo 'Creating a symbolic link to your bin 🔗'
-        for f in ~/.*foo; do 
-            #echo $f
-            #echo 'export PATH=~/.cog/bin:$PATH' >> $f
-            [ -e "$f" ] && echo 'export PATH=~/.cog/bin:$PATH' >> $f || echo "No profile found. Please add ${installFolder}/bin to your \$PATH"
-        done
-    # else
-    #     echo 'Cogfile already exist 💁‍♂️. Updating your cogfile.'
-    #     echo ''
-    #     pushd $installFolder
-    #     git pull --rebase origin master
-    #     popd
-    # fi
-}
+INSTALL_FOLDER="$HOME/Desktop/cog"
+INSTALL_URL="https://github.com/happycog/cog/archive/master.tar.gz"
 
-setup
+echo '📂  Creating cogfile directory'
+rm -rf $INSTALL_FOLDER
+rm -rf /tmp/cog && mkdir /tmp/cog/
+curl -sL $INSTALL_URL | tar xz - -C /tmp/cog/
+mv /tmp/cog $INSTALL_FOLDER
+rm -rf /tmp/cog/
+echo '🔗  Creating a symbolic link to your bin'
+for f in ~/{.profile,.bash_profile}; do 
+    if [ -e "$f" ] ; then
+        if grep -q "PATH=$INSTALL_FOLDER/bin:\$PATH" "$f"; then
+            echo "   -> $f already contains cog/bin";
+        else
+            echo "export PATH=$INSTALL_FOLDER/bin:\$PATH:" >> $f
+            echo "   -> $f updated!"
+        fi
+    else 
+        printf "\n⚠️  No profile found. Please add \`${INSTALL_FOLDER}/bin\` to your \$PATH"
+    fi
+    break
+done
 
 exit 0;
