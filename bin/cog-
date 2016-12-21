@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Set tabs space
+tabs 4
+
+# Default help screen
+
+
+
+
+
+
+
+echo '
+  MMMMMMMMMMMMMMM   MMMMMMMMMMMMMMM
+    MMMMMMMMMMN       MMMMMMMMMMN
+     NMMMMMMMM    MMMMMMMMMMMMMM
+     NMMMMMMMM  MMMMMMMMMMMMMMMM
+     NMMMMMMMM    MMMMMMMMMMMMMM
+    MMMMMMMMMMN       MMMMMMMMMMN
+  MMMMMMMMMMMMMMM   MMMMMMMMMMMMMMM
+'
+
+echo -e 'Usage:'
+echo -e '\tcommand [options] [arguments]'
+echo ''
+echo -e 'Available commands:'
+echo -e "\tgo          Run the project at localhost:${WEBSERVER_PORT:-8000}."
+echo ''
+echo -e "\tcompile     Run the default preprocessor task (gulp, grunt, etc.)."
+echo -e "\twatch       Run the default preprocessor watch task (gulp, grunt, etc.)."
