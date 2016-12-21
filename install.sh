@@ -1,3 +1,5 @@
+#!/bin/bash
+
 set -e
 
 INSTALL_FOLDER="$HOME/.cog"
@@ -11,13 +13,14 @@ mv /tmp/cog/cog-master $INSTALL_FOLDER
 chmod +x $INSTALL_FOLDER/bin/*
 rm -rf /tmp/cog/
 echo '🔗  Creating a symbolic link to your bin'
-for f in ~/{.profile,.bash_profile}; do 
+for f in ~/{.profile,.bash_profile,.bashrc,.zshrc}; do 
     if [ -e "$f" ] ; then
         if grep -q "PATH=$INSTALL_FOLDER/bin:\$PATH" "$f"; then
-            echo "   -> $f already contains cog/bin";
+            echo "   -> $f already contains cog/bin"
         else
             echo "export PATH=$INSTALL_FOLDER/bin:\$PATH:" >> $f
             echo "   -> $f updated!"
+            echo "   -> Please close and re-open your terminal for the install to take effect."
         fi
     else 
         printf "\n⚠️  No profile found. Please add \`${INSTALL_FOLDER}/bin\` to your \$PATH"
