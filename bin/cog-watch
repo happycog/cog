@@ -3,16 +3,21 @@
 GULP_FILE="$PWD/gulpfile.js"
 GRUNT_FILE="$PWD/Gruntfile.js"
 
+GULP_COMPILE_TASK="gulp watch"
+GRUNT_COMPILE_TASK="grunt watch"
+if [ -e Cogfile ]; then
+    source ./Cogfile
+fi
+
+
 # Check if gulpfile.js exist
-if [ -f $GULP_FILE ]
-then
+if [ -f $GULP_FILE ]; then
     echo '💬  Running Gulp watch task...'
-    gulp watch
+    $GULP_COMPILE_TASK
 fi
 
 # Check if Gruntfile.js exist
-if [ -f $GRUNT_FILE ]
-then
+if [ -f $GRUNT_FILE ]; then
   echo '💬  Running Grunt watch task...'
-  grunt watch
+  $GRUNT_COMPILE_TASK
 fi

@@ -2,13 +2,15 @@
 
 set -e
 
+ARG_HOST=${WEBSERVER_HOST:-127.0.0.1}
+ARG_PORT=${WEBSERVER_PORT:-8000}
+ARG_DIR=${DOCUMENT_ROOT:-./}
+
 if [ -e Cogfile ]; then
     source ./Cogfile
 fi
 
-ARG_HOST=${WEBSERVER_HOST:-127.0.0.1}
-ARG_PORT=${WEBSERVER_PORT:-8000}
-ARG_DIR=${DOCUMENT_ROOT:-./}
+
 
 while true ; do
     case "$1" in

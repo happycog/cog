@@ -10,7 +10,6 @@ if [ -z "$ARG_FILENAME" ]; then
   exit 0
 fi
 
-
 # Check if bin folder exist
 if [ ! -d './bin' ]; then
   echo '🗄  Creating bin folder...'
@@ -32,6 +31,5 @@ else
   echo "⚠️  File already exist. Please try again"
   exit 0
 fi
-
 
 echo "[3/3] ✨  Finished. cog-$ARG_FILENAME script was created in ./bin/"
