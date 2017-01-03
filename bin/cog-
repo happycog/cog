@@ -26,6 +26,9 @@ echo -e '\tcommand [options] [arguments]'
 echo ''
 echo -e 'Available commands:'
 echo -e "\tgo          Run the project at localhost:${WEBSERVER_PORT:-8000}."
+echo -e "              -h, --host <host> "
+echo -e "              -p, --port <port> "
+echo -e "              -d, --dir <directory> "
 echo ''
 echo -e "\tcompile     Run the default preprocessor task (gulp, grunt, etc.)."
 echo -e "\twatch       Run the default preprocessor watch task (gulp, grunt, etc.)."
