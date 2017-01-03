@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Variables
+ARG_FILENAME=$1
+
+# Check to see if name argument was passed
+if [ -z "$ARG_FILENAME" ]; then
+  echo '⚠️  Not enough arguments (missing: "name").'
+  echo '⚠️  Example: cog make:script <name>'
+  exit 0
+fi
+
+
+# Check if bin folder exist
+if [ ! -d './bin' ]; then
+  echo 'Creating bin folder'
+  mkdir bin
+fi
+
+cd ./bin
+touch cog-$ARG_FILENAME
+chmod u+x cog-$ARG_FILENAME
+echo "#!/bin/bash" > cog-$ARG_FILENAME

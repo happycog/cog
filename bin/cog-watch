@@ -6,13 +6,13 @@ GRUNT_FILE="$PWD/Gruntfile.js"
 # Check if gulpfile.js exist
 if [ -f $GULP_FILE ]
 then
-    echo '💬 Running Gulp watch task'
+    echo '💬  Running Gulp watch task...'
     gulp watch
 fi
 
 # Check if Gruntfile.js exist
 if [ -f $GRUNT_FILE ]
 then
-  echo '💬 Running Grunt watch task'
+  echo '💬  Running Grunt watch task...'
   grunt watch
 fi
