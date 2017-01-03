@@ -5,12 +5,6 @@ tabs 4
 
 # Default help screen
 
-
-
-
-
-
-
 echo '
   MMMMMMMMMMMMMMM   MMMMMMMMMMMMMMM
     MMMMMMMMMMN       MMMMMMMMMMN
@@ -26,9 +20,10 @@ echo -e '\tcommand [options] [arguments]'
 echo ''
 echo -e 'Available commands:'
 echo -e "\tgo          Run the project at localhost:${WEBSERVER_PORT:-8000}."
-echo -e "              -h, --host <host> "
-echo -e "              -p, --port <port> "
-echo -e "              -d, --dir <directory> "
+echo -e "\t            -h, --host <host> "
+echo -e "\t            -p, --port <port> "
+echo -e "\t            -d, --dir <directory> "
 echo ''
-echo -e "\tcompile     Run the default preprocessor task (gulp, grunt, etc.)."
-echo -e "\twatch       Run the default preprocessor watch task (gulp, grunt, etc.)."
+echo -e "\tcompile     Run the default preprocessor task (gulp compile, grunt compile, etc.)."
+echo ''
+echo -e "\twatch       Run the default preprocessor watch task (gulp watch, grunt watch, etc.)."
