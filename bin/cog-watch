@@ -1,0 +1,18 @@
+#!/bin/bash
+#!/
+GULP_FILE="$PWD/gulpfile.js"
+GRUNT_FILE="$PWD/Gruntfile.js"
+
+# Check if gulpfile.js exist
+if [ -f $GULP_FILE ]
+then
+    echo 'Running Gulp watch task💬'
+    gulp watch
+fi
+
+# Check if Gruntfile.js exist
+if [ -f $GRUNT_FILE ]
+then
+  echo 'Running Grunt watch task💬'
+  grunt watch
+fi
