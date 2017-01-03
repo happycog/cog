@@ -35,9 +35,9 @@ echo -e "\t ${BLUE}-d, --dir${NC} <directory> "
 echo ""
 echo -e "\t${GREEN}make${NC}           Run the make command"
 echo -e "\t ${BLUE}:script${NC}       Pass in the name argument to create a new script"
-
 echo ""
-
+echo -e "\t${GREEN}serve${NC}           Create localhost tunnel with ngrok"
+echo ""
 echo -e "\t${GREEN}compile${NC}        Run the default preprocessor task (gulp compile, grunt compile, etc.)."
 echo ""
 echo -e "\t${GREEN}watch${NC}          Run the default preprocessor watch task (gulp watch, grunt watch, etc.)."
