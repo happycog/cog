@@ -7,9 +7,5 @@ With [yarn](https://github.com/yarnpkg/yarn) do:
 
 `yarn global add hc-cog`
 
-With [npm](https://github.com/npm/npm) do:
-
-`npm install -g hc-cog`
-
 ## Usage
 run `cog` on the command line
