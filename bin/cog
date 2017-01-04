@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CMD=$1
+CMD=${1:-help}
 
 #think about cog help if empty
 
