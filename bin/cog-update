@@ -1,5 +1,5 @@
 #!/bin/bash
 echo '💻  Updating hc-cog...'
 
-# Run global yarn update
+yarn global remove hc-cog
 yarn global add hc-cog@latest
