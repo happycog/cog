@@ -10,9 +10,6 @@ BLUE='\033[0;34m'
 BOLD='\033[0;22m'
 NC='\033[0m' # No Color
 
-
-
-
 # Default help screen
 echo '
   MMMMMMMMMMMMMMM   MMMMMMMMMMMMMMM
