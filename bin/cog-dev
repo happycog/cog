@@ -1,4 +1,17 @@
 #!/bin/bash
 
+if [ -e Cogfile ]; then
+    source ./Cogfile
+fi
 
-compile and watch
+# Check if gulpfile.js exist
+if [ -f 'gulpfile.js' ]; then
+    COMPILE_TASK="gulp"
+    WATCH_TASK="gulp watch"
+
+  elif [ -f 'Gruntfile.js' ]; then
+    COMPILE_TASK="grunt"
+    WATCH_TASK="grunt watch"
+fi
+
+($COMPILE_TASK &&  $WATCH_TASK)

@@ -1,18 +1,14 @@
 #!/bin/bash
-#!/
 if [ -e Cogfile ]; then
     source ./Cogfile
 fi
 
 # Check if gulpfile.js exist
 if [ -f 'gulpfile.js' ]; then
-    echo '💬  Found gulpfile.js ...'
     COMPILE_TASK="gulp"
-
+    
   elif [ -f 'Gruntfile.js' ]; then
-    echo '💬  Found Gruntfile.js ...'
     COMPILE_TASK="grunt"
-
 fi
 
 ( $COMPILE_TASK "${@}" )
