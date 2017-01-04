@@ -1,23 +1,18 @@
 #!/bin/bash
 #!/
-GULP_FILE="$PWD/gulpfile.js"
-GRUNT_FILE="$PWD/Gruntfile.js"
 
-GULP_WATCH_TASK="gulp watch"
-GRUNT_WATCH_TASK="grunt watch"
 if [ -e Cogfile ]; then
     source ./Cogfile
 fi
 
-
 # Check if gulpfile.js exist
-if [ -f $GULP_FILE ]; then
-    echo '💬  Running Gulp watch task...'
-    $GULP_WATCH_TASK
-fi
+if [ -f 'gulpfile.js' ]; then
+    echo '💬  Found gulpfile.js ...'
+    WATCH_TASK="gulp watch"
 
-# Check if Gruntfile.js exist
-if [ -f $GRUNT_FILE ]; then
-  echo '💬  Running Grunt watch task...'
-  $GRUNT_WATCH_TASK
+  elif [ -f 'Gruntfile.js' ]; then
+    echo '💬  Found Gruntfile.js ...'
+    WATCH_TASK="grunt watch"
+
 fi
+( $WATCH_TASK "${@}" )

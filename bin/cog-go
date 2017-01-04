@@ -6,26 +6,27 @@ if [ -e Cogfile ]; then
   source ./Cogfile
 fi
 
+DEFAULT_DOCUMENT_ROOT=./
+if [ -d public ]; then
+  DEFAULT_DOCUMENT_ROOT=public/
+fi
+
 WEBSERVER_HOST=${WEBSERVER_HOST:-127.0.0.1}
 WEBSERVER_PORT=${WEBSERVER_PORT:-8000}
-DOCUMENT_ROOT=${DOCUMENT_ROOT:-./}
+DOCUMENT_ROOT=${DOCUMENT_ROOT:-$DEFAULT_DOCUMENT_ROOT}
 
 while true ; do
     case "$1" in
         -h|--host)
             case "$2" in
-                "") WEBSERVER_HOST='127.0.0.1' ; shift 2 ;;
                 *) WEBSERVER_HOST=$2 ; shift 2 ;;
             esac ;;
         -p|--port)
             case "$2" in
-                "") WEBSERVER_PORT='8000' ; shift 2 ;;
                 *) WEBSERVER_PORT=$2 ; shift 2 ;;
             esac ;;
         -d|--dir)
             case "$2" in
-              # look for public folder
-                "") DOCUMENT_ROOT='./' ; shift 2 ;;
                 *) DOCUMENT_ROOT=$2 ; shift 2 ;;
             esac ;;
         --) shift ; break ;;

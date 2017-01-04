@@ -1,24 +1,18 @@
 #!/bin/bash
 #!/
-GULP_FILE="$PWD/gulpfile.js"
-GRUNT_FILE="$PWD/Gruntfile.js"
-
-GULP_COMPILE_TASK="gulp compile"
-GRUNT_COMPILE_TASK="grunt compile"
-
 if [ -e Cogfile ]; then
     source ./Cogfile
 fi
 
-
 # Check if gulpfile.js exist
-if [ -f $GULP_FILE ]; then
-    echo '💬  Compiling Gulp...'
-    $GULP_COMPILE_TASK
+if [ -f 'gulpfile.js' ]; then
+    echo '💬  Found gulpfile.js ...'
+    COMPILE_TASK="gulp"
+
+  elif [ -f 'Gruntfile.js' ]; then
+    echo '💬  Found Gruntfile.js ...'
+    COMPILE_TASK="grunt"
+
 fi
 
-# Check if Gruntfile.js exist
-if [ -f $GRUNT_FILE ]; then
-  echo '💬  Compiling Grunt...'
-  $GRUNT_COMPILE_TASK
-fi
+( $COMPILE_TASK "${@}" )
