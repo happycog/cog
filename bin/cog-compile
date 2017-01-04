@@ -5,6 +5,7 @@ GRUNT_FILE="$PWD/Gruntfile.js"
 
 GULP_COMPILE_TASK="gulp compile"
 GRUNT_COMPILE_TASK="grunt compile"
+
 if [ -e Cogfile ]; then
     source ./Cogfile
 fi

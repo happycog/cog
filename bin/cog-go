@@ -2,32 +2,31 @@
 
 set -e
 
-ARG_HOST=${WEBSERVER_HOST:-127.0.0.1}
-ARG_PORT=${WEBSERVER_PORT:-8000}
-ARG_DIR=${DOCUMENT_ROOT:-./}
-
 if [ -e Cogfile ]; then
-    source ./Cogfile
+  source ./Cogfile
 fi
 
-
+WEBSERVER_HOST=${WEBSERVER_HOST:-127.0.0.1}
+WEBSERVER_PORT=${WEBSERVER_PORT:-8000}
+DOCUMENT_ROOT=${DOCUMENT_ROOT:-./}
 
 while true ; do
     case "$1" in
         -h|--host)
             case "$2" in
-                "") ARG_HOST='127.0.0.1' ; shift 2 ;;
-                *) ARG_HOST=$2 ; shift 2 ;;
+                "") WEBSERVER_HOST='127.0.0.1' ; shift 2 ;;
+                *) WEBSERVER_HOST=$2 ; shift 2 ;;
             esac ;;
         -p|--port)
             case "$2" in
-                "") ARG_PORT='8000' ; shift 2 ;;
-                *) ARG_PORT=$2 ; shift 2 ;;
+                "") WEBSERVER_PORT='8000' ; shift 2 ;;
+                *) WEBSERVER_PORT=$2 ; shift 2 ;;
             esac ;;
         -d|--dir)
             case "$2" in
-                "") ARG_DIR='./' ; shift 2 ;;
-                *) ARG_DIR=$2 ; shift 2 ;;
+              # look for public folder
+                "") DOCUMENT_ROOT='./' ; shift 2 ;;
+                *) DOCUMENT_ROOT=$2 ; shift 2 ;;
             esac ;;
         --) shift ; break ;;
 	"") break ;;
@@ -35,5 +34,5 @@ while true ; do
     esac
 done
 
-pushd $ARG_DIR > /dev/null
-php -S $ARG_HOST:$ARG_PORT
+pushd $DOCUMENT_ROOT > /dev/null
+php -S $WEBSERVER_HOST:$WEBSERVER_PORT

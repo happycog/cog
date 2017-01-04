@@ -2,13 +2,15 @@
 
 set -e
 
-ARG_HOST=${WEBSERVER_HOST:-127.0.0.1}
-ARG_PORT=${WEBSERVER_PORT:-8000}
-ARG_DIR=${DOCUMENT_ROOT:-./}
-
 if [ -e Cogfile ]; then
     source ./Cogfile
 fi
 
-pushd $ARG_DIR > /dev/null
-ngrok http $ARG_HOST:$ARG_PORT
+WEBSERVER_HOST=${WEBSERVER_HOST:-127.0.0.1}
+WEBSERVER_PORT=${WEBSERVER_PORT:-8000}
+DOCUMENT_ROOT=${DOCUMENT_ROOT:-./}
+
+
+
+pushd $DOCUMENT_ROOT > /dev/null
+ngrok http $WEBSERVER_HOST:$WEBSERVER_PORT
