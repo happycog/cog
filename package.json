@@ -15,5 +15,15 @@
   "bugs": {
     "url": "https://github.com/happycog/cog/issues"
   },
-  "homepage": "https://github.com/happycog/cog#readme"
+  "homepage": "https://github.com/happycog/cog#readme",
+  "bin": {
+    "cog": "./bin/cog",
+    "cog-compile": "./bin/cog-compile",
+    "cog-go": "./bin/cog-go",
+    "cog-make": "./bin/cog-make",
+    "cog-make:script": "./bin/cog-make:script",
+    "cog-s3-deploy": "./bin/cog-s3-deploy",
+    "cog-serve": "./bin/cog-serve",
+    "cog-watch": "./bin/cog-watch"
+  }
 }
