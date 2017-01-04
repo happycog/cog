@@ -31,6 +31,17 @@
   ],
   "homepage": "https://github.com/happycog/cog#readme",
   "bin": {
-    "cog": "./bin/cog"
+    "cog": "./bin/cog",
+    "cog-compile": "./bin/cog-compile",
+    "cog-dev": "./bin/cog-dev",
+    "cog-go": "./bin/cog-go",
+    "cog-help": "./bin/cog-help",
+    "cog-make": "./bin/cog-make",
+    "cog-make:cogfile": "./bin/cog-make:cogfile",
+    "cog-make:script": "./bin/cog-make:script",
+    "cog-s3-deploy": "./bin/cog-s3-deploy",
+    "cog-serve": "./bin/cog-serve",
+    "cog-update": "./bin/cog-update",
+    "cog-watch": "./bin/cog-watch"
   }
 }
