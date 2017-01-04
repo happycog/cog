@@ -1,0 +1,10 @@
+#!/bin/bash
+echo '💻  Updating hc-cog...'
+
+# Run global yarn update
+sudo yarn global add hc-cog@latest
+
+# If user does not have yarn, use NPM
+if [ $? -eq 1 ]; then
+  sudo npm install -g hc-cog
+fi
