@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e
 
-if [ -e Cogfile ]; then
-  source ./Cogfile
+if [ -e .env ]; then
+  source ./.env
 fi
 
 DEFAULT_DOCUMENT_ROOT=./

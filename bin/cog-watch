@@ -1,8 +1,8 @@
 #!/bin/bash
 #!/
 
-if [ -e Cogfile ]; then
-    source ./Cogfile
+if [ -e .env ]; then
+    source ./.env
 fi
 
 # Check if gulpfile.js exist
