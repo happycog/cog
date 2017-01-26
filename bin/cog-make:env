@@ -8,5 +8,5 @@ if [ -f ".env" ]; then
     exit 0
 fi
 touch .env.example
-echo -e "WEBSERVER_HOST=\nWEBSERVER_PORT=\nARG_DIR="> .env.example
+echo -e "APP_ENV=\nAPP_URL=\nDB_CONNECTION=\nDB_HOST=\nDB_PORT=\nDB_DATABASE=\nDB_USERNAME=\nDB_PASSWORD=\nDB_BACKUP_NAME=\nWEBSERVER_HOST=\nWEBSERVER_PORT=\nARG_DIR=\nS3_KEY=\nS3_SECRET=\nS3_REGION=\nS3_BUCKET=\nS3_BACKUP_BUCKET="> .env.example
 echo '✨ .env.example was created. Rename the file to .env to use.'
