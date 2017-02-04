@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Get latest version
+VERSION=$(git describe)
+# Replace points, split into array
+a=( ${VERSION//./ } )
+
+# Check if arugment passed with cog tag
+if [ -z "$1" ];
+  then
+    echo $VERSION
+  elif [[ $1  == 'major' ]]; then
+    ((a[0]++))
+    NEW_VERSION=${a[0]}.${a[1]}.${a[2]}
+    echo $NEW_VERSION
+    git tag $NEW_VERSION
+    git push --tags
+  elif [[ $1  == 'minor' ]]; then
+    ((a[1]++))
+    NEW_VERSION=${a[0]}.${a[1]}.${a[2]}
+    echo $NEW_VERSION
+    git tag $NEW_VERSION
+    git push --tags
+
+  elif [[ $1  == 'patch' ]]; then
+    ((a[2]++))
+    NEW_VERSION=${a[0]}.${a[1]}.${a[2]}
+    echo $NEW_VERSION
+    git tag $NEW_VERSION
+    git push --tags
+   else
+     echo 'Error: Unknown argument'
+     exit 0
+fi

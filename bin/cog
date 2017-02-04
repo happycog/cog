@@ -7,7 +7,6 @@ shift
 # Check if /bin exist in current directory
 if [ -f "./bin/cog-$CMD" ]; then
     # Overwrite script exist. Run this
-    echo "✨  Executing custom script..."
     ( "./bin/cog-$CMD" "${@}")
   else
     # Execute default scripts

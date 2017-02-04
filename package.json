@@ -42,6 +42,7 @@
     "cog-s3-deploy": "./bin/cog-s3-deploy",
     "cog-serve": "./bin/cog-serve",
     "cog-update": "./bin/cog-update",
+    "cog-tag": "./bin/cog-tag",
     "cog-watch": "./bin/cog-watch"
   }
 }
