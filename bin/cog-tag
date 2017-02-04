@@ -29,6 +29,6 @@ if [ -z "$1" ];
     git tag $NEW_VERSION
     git push --tags
    else
-     echo 'Error: Unknown argument'
+     echo 'Error: cog tag [ major | minor | patch ]'
      exit 0
 fi
