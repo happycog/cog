@@ -11,24 +11,18 @@ if [ -z "$1" ];
     echo $VERSION
   elif [[ $1  == 'major' ]]; then
     ((a[0]++))
-    NEW_VERSION=${a[0]}.${a[1]}.${a[2]}
-    echo $NEW_VERSION
-    git tag $NEW_VERSION
-    git push --tags
   elif [[ $1  == 'minor' ]]; then
     ((a[1]++))
-    NEW_VERSION=${a[0]}.${a[1]}.${a[2]}
-    echo $NEW_VERSION
-    git tag $NEW_VERSION
-    git push --tags
-
   elif [[ $1  == 'patch' ]]; then
     ((a[2]++))
-    NEW_VERSION=${a[0]}.${a[1]}.${a[2]}
-    echo $NEW_VERSION
-    git tag $NEW_VERSION
+  elif [[ $1  == 'push' ]]; then
     git push --tags
+    exit 0
    else
      echo 'Error: cog tag [ major | minor | patch ]'
      exit 0
 fi
+
+NEW_VERSION=${a[0]}.${a[1]}.${a[2]}
+echo $VERSION. ' -> '.$NEW_VERSION
+git tag $NEW_VERSION
