@@ -8,6 +8,8 @@ fi
 DEFAULT_DOCUMENT_ROOT=./
 if [ -d public ]; then
   DEFAULT_DOCUMENT_ROOT=public/
+elif [ -d public_html ]; then
+  DEFAULT_DOCUMENT_ROOT=public_html/
 fi
 
 WEBSERVER_HOST=${WEBSERVER_HOST:-127.0.0.1}
