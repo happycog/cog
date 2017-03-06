@@ -33,6 +33,7 @@
   "bin": {
     "cog": "./bin/cog",
     "cog-compile": "./bin/cog-compile",
+    "cog-convert": "./bin/cog-convert",
     "cog-dev": "./bin/cog-dev",
     "cog-go": "./bin/cog-go",
     "cog-help": "./bin/cog-help",
