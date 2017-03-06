@@ -1,6 +1,6 @@
 {
   "name": "hc-cog",
-  "version": "0.4.4",
+  "version": "0.5.0",
   "description": "Happy Cog bash script that helps automate the development workflow",
   "main": "index.js",
   "scripts": {
@@ -33,6 +33,7 @@
   "bin": {
     "cog": "./bin/cog",
     "cog-compile": "./bin/cog-compile",
+    "cog-convert": "./bin/cog-convert",
     "cog-dev": "./bin/cog-dev",
     "cog-go": "./bin/cog-go",
     "cog-help": "./bin/cog-help",
