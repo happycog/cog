@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ ${1: -4} == ".mov" ] && [ ${2: -4} == ".mp4" ]; then
+  ffmpeg -i "$1" -vcodec copy -acodec cop "$2"
+elif [ ${1: -4} == ".mov" ] && [ ${2: -4} == ".gif" ]; then
+  ffmpeg -i "$1" -pix_fmt rgb24 -r 12 "$2"
+  convert -layers Optimize "$2" "$2"
+else
+  echo "Unknown conversion!"
+fi
