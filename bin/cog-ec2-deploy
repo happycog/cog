@@ -1,0 +1,24 @@
+#!/bin/bash
+
+set -e
+
+if [ -e .env ]; then
+    source ./.env
+fi
+
+ARG_DIR=${DOCUMENT_ROOT:-./}
+
+ while true ; do
+     case "$1" in
+         -d|--dir)
+               case "$2" in
+                 "") ARG_DIR='./' ; shift 2 ;;
+                 *) ARG_DIR=$2 ; shift 2 ;;
+               esac ;;
+         --) shift ; break ;;
+         "") break ;;
+     esac
+ done
+
+rsync -avz -e "ssh -i keys/happycog-laravel-source.pem" $ARG_DIR ubuntu@34.198.81.107:/var/www/test
+echo '✨ Deploy Complete'
