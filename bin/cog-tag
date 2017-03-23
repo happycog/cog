@@ -34,14 +34,14 @@ ask() {
 createTag() {
   NEW_VERSION="v$1.$2.$3"
   echo -e "Updated version $VERSION ➡️  ${YELLOW}$NEW_VERSION${NC}"
-  git tag -a $NEW_VERSION -m "Tag $NEW_VERSION"
+  git tag -a $NEW_VERSION -m "$NEW_VERSION"
 }
 
 # Fetch tags
 git fetch --tags
 
 # Get latest version
-VERSION=$(git describe)
+VERSION=$(git describe --abbrev=0 --tags)
 
 # Check if current project has tags
 if [[ -z "$VERSION" ]]; then
@@ -71,12 +71,13 @@ if [ -z "$1" ];
     echo -e "Run ${GREEN}cog tag [ major | minor | patch | push ]${NC}"
   elif [[ $1  == 'major' ]]; then
     MAJOR_VALUE=$((MAJOR_VALUE+1))
+    MINOR_VALUE=0
+    PATCH_VALUE=0
     createTag $MAJOR_VALUE $MINOR_VALUE $PATCH_VALUE
   elif [[ $1  == 'minor' ]]; then
     # If v1.9.0
     if [[ $MINOR_VALUE == 9 ]]; then
       MAJOR_VALUE=$((MAJOR_VALUE+1))
-      MINOR_VALUE=0
       MINOR_VALUE=0
       # If v2.0.0
       createTag $MAJOR_VALUE $MINOR_VALUE $PATCH_VALUE
