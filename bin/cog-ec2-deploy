@@ -20,5 +20,5 @@ ARG_DIR=${DOCUMENT_ROOT:-./}
      esac
  done
 
-rsync -avz -e "ssh -i keys/happycog-laravel-source.pem" $ARG_DIR ubuntu@34.198.81.107:/var/www/test
-echo '✨ Deploy Complete'
+#rsync -avz -e "ssh -i keys/happycog-laravel-source.pem" $ARG_DIR ubuntu@34.198.81.107:/var/www/test
+echo 'View cog ec2-deploy script to create your own'
