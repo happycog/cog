@@ -79,16 +79,17 @@ if [ -z "$1" ];
     if [[ $MINOR_VALUE == 9 ]]; then
       MAJOR_VALUE=$((MAJOR_VALUE+1))
       MINOR_VALUE=0
+      PATCH_VALUE=0
       # If v2.0.0
       createTag $MAJOR_VALUE $MINOR_VALUE $PATCH_VALUE
       else
         MINOR_VALUE=$((MINOR_VALUE+1))
+        PATCH_VALUE=0
         createTag $MAJOR_VALUE $MINOR_VALUE $PATCH_VALUE
     fi
   elif [[ $1  == 'patch' ]]; then
     # If v.1.0.9
     if [[ $PATCH_VALUE == 9 ]]; then
-      echo 'lkj'
       # If v.1.9.9
       if [[ $MINOR_VALUE == 9 ]]; then
         echo '9'
