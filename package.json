@@ -32,6 +32,7 @@
   "homepage": "https://github.com/happycog/cog#readme",
   "bin": {
     "cog": "./bin/cog",
+    "cog-clone": "./bin/cog-clone",
     "cog-compile": "./bin/cog-compile",
     "cog-convert": "./bin/cog-convert",
     "cog-dev": "./bin/cog-dev",
