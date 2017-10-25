@@ -1,5 +1,5 @@
 # Cog
-![yo dawg](https://raw.github.com/happycog/cog/yo_dawg.jpg)
+![yo dawg](https://raw.githubusercontent.com/happycog/cog/master/yo_dawg.jpg)
 
 ## Installation
 With [yarn](https://github.com/yarnpkg/yarn) do:
