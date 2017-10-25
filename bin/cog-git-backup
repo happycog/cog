@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Git clone a remote repository to a local folder
+# and then checkout all remote branches so you have
+# a complete backup
+
+set -e
+
+: ${1?Must pass a Git URL as the first param}
+: ${2?Must pass folder to backup to}
+
+REMOTE=$1
+FOLDER=$2
+
+git clone $REMOTE
+pushd $2
+for remote in `git branch -r | grep -v /HEAD | grep -v /master`; do git checkout --track $remote ; done
+git checkout master
+popd
