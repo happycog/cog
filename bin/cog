@@ -4,11 +4,14 @@ CMD=${1:-help}
 # Drop next argument
 shift
 
+# Get the current dir
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 # Check if /bin exist in current directory
 if [ -f "./bin/cog-$CMD" ]; then
     # Overwrite script exist. Run this
-    ( "./bin/cog-$CMD" "${@}")
+    ( set -a; source .env 2> /dev/null; "./bin/cog-$CMD" "${@}")
   else
     # Execute default scripts
-    ( "cog-$CMD" "${@}" )
+    ( set -a; source .env 2> /dev/null; "$DIR/cog-$CMD" "${@}" )
 fi
