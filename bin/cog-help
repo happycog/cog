@@ -43,3 +43,6 @@ echo ""
 echo -e "\t${GREEN}watch${NC}          Run the default preprocessor watch task (gulp watch, grunt watch, etc.)."
 echo ""
 echo -e "\t${GREEN}tag${NC}            Create git tags [${BLUE} major | minor | patch | push${NC}]"
+
+#TODO
+#Add abilty to search local bin for new commands
