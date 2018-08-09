@@ -20,6 +20,19 @@ ARG_DIR=${DOCUMENT_ROOT:-./}
      esac
  done
 
-obj=$(basename "$PWD")
-branch=$(git symbolic-ref --short -q HEAD)
+# set the repo name by environment variable, or default to the current folder name
+if [ -z "$S3_REPO_NAME" ]; then
+    obj=$(basename "$PWD")
+else
+    obj=$S3_REPO_NAME
+fi
+
+# set the branch name by environment variable or use the git branch name
+if [ -z "$S3_BRANCH_NAME" ]; then
+    branch=$(git symbolic-ref --short -q HEAD)
+else
+    branch=$S3_BRANCH_NAME
+fi
+
+# push to s3
 aws s3 cp $ARG_DIR s3://happycog-static/$obj/$branch --recursive --acl=public-read
