@@ -1,5 +1,12 @@
 #!/bin/bash
 CMD=${1:-help}
+dir=$(pwd)
+
+
+# Include all scripts inside the tools folder
+for file in ./tools/*; do
+  source $file
+done
 
 # Drop next argument
 shift
