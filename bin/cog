@@ -1,7 +1,6 @@
 #!/bin/bash
 CMD=${1:-help}
-dir=$(pwd)
-
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Include all scripts inside the tools folder
 for file in ./tools/*; do
@@ -12,9 +11,8 @@ done
 shift
 
 # Get the current dir
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# Check if /bin exist in current directory
+# Check if /bin exist in current directory and automaticlly include the .env file
 if [ -f "./bin/cog-$CMD" ]; then
     # Overwrite script exist. Run this
     ( set -a; source .env 2> /dev/null; "./bin/cog-$CMD" "${@}")
