@@ -13,3 +13,10 @@ Running `cog` on the command line will list all of the avalible scripts and a sh
 
 ## Update
 Run `cog update` to recieve the latest version. To update this package, run `npm version {patch, minor, major}` followed by `npm publish`
+
+## Builds
+If you're using `Go` to write any commands, put your source `.go` file into the `src` directory and run this command to build it into a binary in the `bin` directory:
+
+```
+npm run build
+```
