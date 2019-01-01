@@ -1,6 +1,6 @@
 {
   "name": "hc-cog",
-  "version": "0.5.6",
+  "version": "0.6.0",
   "description": "Happy Cog bash script that helps automate the development workflow",
   "main": "index.js",
   "scripts": {
@@ -27,6 +27,10 @@
     {
       "name": "Paul Phan",
       "url": "https://github.com/mrpaulphan"
+    },
+    {
+      "name": "Matt Weinberg",
+      "url": "https://github.com/mrw"
     }
   ],
   "homepage": "https://github.com/happycog/cog#readme",
