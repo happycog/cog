@@ -37,8 +37,5 @@
   "homepage": "https://github.com/happycog/cog#readme",
   "bin": {
     "cog": "./bin/cog"
-  },
-  "dependencies": {
-    "gulp": "^4.0.0"
   }
 }
