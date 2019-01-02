@@ -30,7 +30,7 @@ func main() {
 		},
 	}
 
-	// Look for a URL as the argument, and use VMG if none exists.
+	// Look for a URL as the argument, and use HC if none exists.
 	RawURL := "https://happycog.com"
 
 	if len(os.Args) > 1 {
