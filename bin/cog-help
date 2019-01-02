@@ -48,6 +48,8 @@ echo -e "\t${GREEN}tag${NC}            Create git tags [${BLUE} major | minor | 
 echo ""
 echo -e "\t${GREEN}update${NC}         Create git tags [${BLUE} major | minor | patch | push${NC}]"
 echo ""
+echo -e "\t${GREEN}ssl-check${NC}      Outputs info and runs some validity checks on a domain's SSL certificate"
+echo ""
 echo "Visit https://github.com/happycog/cog/ to learn more about cog."
 
 #TODO

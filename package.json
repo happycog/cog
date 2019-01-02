@@ -1,10 +1,11 @@
 {
   "name": "hc-cog",
-  "version": "0.5.6",
+  "version": "0.6.0",
   "description": "Happy Cog bash script that helps automate the development workflow",
   "main": "index.js",
   "scripts": {
-    "test": "echo \\\"Error: no test specified\\\" && exit 1"
+    "test": "echo \\\"Error: no test specified\\\" && exit 1",
+    "build": "find src/*.go | sed -E 's_(.*/|\\..*)__g' | xargs -I {} go build -v -i -o bin/{} src/{}.go"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,10 @@
     {
       "name": "Paul Phan",
       "url": "https://github.com/mrpaulphan"
+    },
+    {
+      "name": "Matt Weinberg",
+      "url": "https://github.com/mrw"
     }
   ],
   "homepage": "https://github.com/happycog/cog#readme",
