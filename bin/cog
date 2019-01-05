@@ -1,16 +1,19 @@
 #!/bin/bash
 CMD=${1:-help}
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Yarn global adds the cog binary to your $PATH through a bunch of 
+# symlinks. `readlink -f` isn't available on Mac, so this uses 
+# Python to grab the fully resolved path of `cog` and then two
+# `dirname`s to back out to the true installed repo directory.
+DIR=$(dirname $(dirname $(python -c "import os; print(os.path.realpath('${BASH_SOURCE[0]}'))")))
 
 # Include all scripts inside the tools folder
-for file in ./tools/*; do
+for file in $DIR/tools/*; do
   source $file
 done
 
 # Drop next argument
 shift
-
-# Get the current dir
 
 # Check if /bin exist in current directory and automaticlly include the .env file
 if [ -f "./bin/cog-$CMD" ]; then
@@ -18,5 +21,5 @@ if [ -f "./bin/cog-$CMD" ]; then
     ( set -a; source .env 2> /dev/null; "./bin/cog-$CMD" "${@}")
   else
     # Execute default scripts
-    ( set -a; source .env 2> /dev/null; "$DIR/cog-$CMD" "${@}" )
+    ( set -a; source .env 2> /dev/null; "$DIR/bin/cog-$CMD" "${@}" )
 fi
