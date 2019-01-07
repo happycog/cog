@@ -50,6 +50,10 @@ func main() {
 
 	fmt.Printf("Getting certificate info for %s \n\n", info(ParsedURL.Host))
 
+	if ParsedURL.Scheme == "http" {
+		fmt.Printf("%s: passed URL is using http, not https \n\n", warn("Warning"))
+	}
+
 	resp, err := client.Get(ParsedURL.Scheme + "://" + ParsedURL.Host)
 	if err != nil {
 		panic(err)
