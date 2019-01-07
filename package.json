@@ -1,6 +1,6 @@
 {
   "name": "hc-cog",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "description": "Happy Cog bash script that helps automate the development workflow",
   "main": "index.js",
   "scripts": {
