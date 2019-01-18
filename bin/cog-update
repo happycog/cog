@@ -2,9 +2,6 @@
 
 # cog update
 # This command will update all the this package to the latest version.
-for file in ./tools/*; do
-  source $file
-done
 
 echo -e "💻  Updating $(name)@$(version)..."
 

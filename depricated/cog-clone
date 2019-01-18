@@ -1,0 +1,4 @@
+#!/bin/bash
+
+COG_DESCRIPTION='This is a test';
+# Description: hey
