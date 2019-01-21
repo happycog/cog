@@ -1,27 +1,29 @@
 #!/bin/bash
 
-# cog requires an argument. If there is no argument, cog will call cog-help
-CMD=${1:-help}
-
 # Yarn global adds the cog binary to your $PATH through a bunch of 
 # symlinks. `readlink -f` isn't available on Mac, so this uses 
 # Python to grab the fully resolved path of `cog` and then two
 # `dirname`s to back out to the true installed repo directory.
-DIR=$(dirname $(dirname $(python -c "import os; print(os.path.realpath('${BASH_SOURCE[0]}'))")))
-echo $DIR;
+COG_DIRECTORY=$(dirname $(dirname $(python -c "import os; print(os.path.realpath('${BASH_SOURCE[0]}'))")))
+export COG_DIRECTORY;
+
+
 # Include all scripts inside the tools folder
-for file in $DIR/tools/*; do
+for file in $COG_DIRECTORY/tools/*; do
   source $file
 done
 
-# Drop next argument
-shift
+
+# cog requires an argument. If there is no argument, cog will call cog-help
+CMD=${1:-help}; shift
 
 # Check if /bin exist in current directory and automaticlly include the .env file
-if [ -f "./bin/cog-$CMD" ]; then
-    # Overwrite script exist. Run this
-    ( set -a; source .env 2> /dev/null; "./bin/cog-$CMD" "${@}")
+if [ -d "$PWD/bin" ]; then
+  if [ -f "$PWD/bin/cog-$CMD" ]; then
+    ( set -a; source .env 2> /dev/null; "$PWD/bin/cog-$CMD" "${@}")
   else
-    # Execute default scripts
-    ( set -a; source .env 2> /dev/null; "$DIR/bin/cog-$CMD" "${@}" )
+    ( set -a; source .env 2> /dev/null; "$COG_DIRECTORY/bin/cog-$CMD" "${@}" )
+  fi
+else
+    ( set -a; source .env 2> /dev/null; "$COG_DIRECTORY/bin/cog-$CMD" "${@}" )
 fi

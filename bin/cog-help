@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # Set tabs space
 tabs 4
 
@@ -9,34 +8,47 @@ YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
 BOLD='\033[0;22m'
 NC='\033[0m' # No Color
+descriptionSpacing=10;
 
-display_commands() {
+displayGlobalCommands() {
+  echo -e "${YELLOW}Global commands:${NC}"
+  echo ""
+  for file in $COG_DIRECTORY/bin/*; do
+    base_file=$(basename "$file");
+    # Ignore specific scripts
+    if [[ "$base_file" == "cog" ]] || [[ "$base_file" == "cog-help" ]] || [[ "$base_file" == "cog-ssl-check" ]]; then
+      continue
+    fi
 
-echo -e "${YELLOW}Available commands:${NC}"
+    COG_COMMAND=$(sed -e 's#.*-\(\)#\1#' <<< "$base_file");
+    COG_DESCRIPTION=$(sed -n 's/# Description: //p' $file);
+    # nameLength ${#COG_COMMAND};
+    echo -e "\t${GREEN}$COG_COMMAND${NC}        $COG_DESCRIPTION";
+    echo "";
+  done
+}
 
-# scripts=$PWD/bin/*;
-echo $COG_DIRECTORY;
-scripts=s$COG_DIRECTORY/bin/*;
-for file in $scripts; do
-  base_file=$(basename "$file");
-  if [[ "$base_file" == "cog" ]] ||  [[ "$base_file" == "cog-help" ]]; then
-   continue
+displayProjectCommands() {
+  if [ -d "$PWD/bin" ]; then
+    echo -e "${YELLOW}Project commands:${NC}"
+    echo ""
+    for file in $PWD/bin/*; do
+      base_file=$(basename "$file");
+      COG_COMMAND=$(sed -e 's#.*-\(\)#\1#' <<< "$base_file");
+      COG_DESCRIPTION=$(sed -n 's/# Description: //p' $file);
+      echo -e "\t${GREEN}$COG_COMMAND${NC}        $COG_DESCRIPTION";
+      echo "";
+    done
   fi
-  COG_COMMAND=$(sed -e 's#.*-\(\)#\1#' <<< "$base_file");
-  COG_DESCRIPTION=$(sed -n 's/# Description: //p' $file);
-  echo -e "\t${GREEN}$COG_COMMAND${NC}        $COG_DESCRIPTION";
-  echo "";
-done
-echo -e "\t${GREEN}make${NC}           Run the make command"
-echo -e "\t ${BLUE}:script${NC}       Pass in the name argument to create a new script"
-echo -e "\t ${BLUE}:env${NC}          Creates a .env file for your project"
-echo ""
-echo -e "\t${GREEN}tag${NC}            Create git tags [${BLUE} major | minor | patch | push${NC}]"
-echo ""
-echo -e "\t${GREEN}update${NC}         Create git tags [${BLUE} major | minor | patch | push${NC}]"
-echo ""
-echo -e "\t${GREEN}ssl-check${NC}      Outputs info and runs some validity checks on a domain's SSL certificate"
-echo ""
+}
+
+# Create even spacing for description
+nameLength() {
+  length=$1;
+
+  if  (( $length > $descriptionSpacing )); then 
+    descriptionSpacing=$length;
+  fi
 }
 
 
@@ -50,30 +62,8 @@ echo '
     MMMMMMMMMMN       MMMMMMMMMMN
   MMMMMMMMMMMMMMM   MMMMMMMMMMMMMMM
 '
-
-echo -e "${YELLOW}Usage:${NC}"
-echo -e "\tcommand [options] [arguments]"
-echo ""
-display_commands
-# Load Project Scripts
-echo -e "${YELLOW}Project commands:${NC}"
-echo ""
-
-# scripts=$PWD/bin/*;
-scripts=/Users/mrpaulphan/Development/kintone-pantheon/bin/*;
-for file in $scripts; do
-  base_file=$(basename "$file");
-  if [[ "$base_file" == "cog" ]] ||  [[ "$base_file" == "cog-help" ]]; then
-   continue
-  fi
-  COG_COMMAND=$(sed -e 's#.*-\(\)#\1#' <<< "$base_file");
-  COG_DESCRIPTION=$(sed -n 's/# Description: //p' $file);
-  echo -e "\t${GREEN}$COG_COMMAND${NC}        $COG_DESCRIPTION";
-  echo "";
-done
+displayGlobalCommands;
+displayProjectCommands;
 echo ""
 echo ""
 echo "Visit https://github.com/happycog/cog/ to learn more about cog."
-
-# #TODO
-# #Add abilty to search local bin for new commands

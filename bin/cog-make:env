@@ -1,6 +1,6 @@
 #!/bin/bash
+# Description:    Create .env file
 
-# Variables
 ARG_FILENAME=$1
 
 if [ -f ".env" ]; then
