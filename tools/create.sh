@@ -36,3 +36,4 @@ fi
 echo "[3/3] ✨  Finished. cog-$ARG_FILENAME script was created in ./bin/"
 
 }
+export -f createScript;

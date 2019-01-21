@@ -2,13 +2,6 @@
 # Set tabs space
 tabs 4
 
-# Color Format
-GREEN='\033[0;32m'
-YELLOW='\033[0;33m'
-BLUE='\033[0;34m'
-BOLD='\033[0;22m'
-NC='\033[0m' # No Color
-
 displayGlobalCommands() {
   echo -e "${YELLOW}Global commands:${NC}"
   echo ""
@@ -52,6 +45,9 @@ nameLength() {
 
 
 # Default help screen
+echo ""
+echo -e "$(packageName) ${GREEN}$(packageVersion)${NC}";
+
 echo '
   MMMMMMMMMMMMMMM   MMMMMMMMMMMMMMM
     MMMMMMMMMMN       MMMMMMMMMMN
@@ -62,6 +58,7 @@ echo '
   MMMMMMMMMMMMMMM   MMMMMMMMMMMMMMM
 '
 displayGlobalCommands;
+echo ""
 displayProjectCommands;
 echo ""
 echo ""

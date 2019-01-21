@@ -1,8 +1,10 @@
-name() {
-  awk '/name/{gsub(/("|",)/,"",$0); print $2; exit};' package.json
+packageName() {
+  awk '/name/{gsub(/("|",)/,"",$0); print $2; exit};' $COG_DIRECTORY/package.json
 }
 
-version() {
-  awk '/version/{gsub(/("|",)/,"",$2); print $2; exit};' package.json
+packageVersion() {
+  awk '/version/{gsub(/("|",)/,"",$2); print $2; exit};' $COG_DIRECTORY/package.json
 }
 
+export -f packageName;
+export -f packageVersion;

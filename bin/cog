@@ -4,9 +4,13 @@
 # symlinks. `readlink -f` isn't available on Mac, so this uses 
 # Python to grab the fully resolved path of `cog` and then two
 # `dirname`s to back out to the true installed repo directory.
-COG_DIRECTORY=$(dirname $(dirname $(python -c "import os; print(os.path.realpath('${BASH_SOURCE[0]}'))")))
-export COG_DIRECTORY;
-
+export COG_DIRECTORY=$(dirname $(dirname $(python -c "import os; print(os.path.realpath('${BASH_SOURCE[0]}'))")));
+# Color Format
+export GREEN='\033[0;32m'
+export YELLOW='\033[0;33m'
+export BLUE='\033[0;34m'
+export BOLD='\033[0;22m'
+export NC='\033[0m' # No Color
 
 # Include all scripts inside the tools folder
 for file in $COG_DIRECTORY/tools/*; do
