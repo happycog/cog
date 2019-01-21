@@ -13,14 +13,18 @@ for file in $COG_DIRECTORY/tools/*; do
   source $file
 done
 
+if [ -e .env ]; then
+    source ./.env
+fi
+
 
 # cog requires an argument. If there is no argument, cog will call cog-help
 CMD=${1:-help}; shift
 
 # Check if /bin exist in current directory and automaticlly include the .env file
-if [ -d "$PWD/bin" ]; then
-  if [ -f "$PWD/bin/cog-$CMD" ]; then
-    ( set -a; source .env 2> /dev/null; "$PWD/bin/cog-$CMD" "${@}")
+if [ -d "./bin" ]; then
+  if [ -f "./bin/cog-$CMD" ]; then
+    ( set -a; source .env 2> /dev/null; "./bin/cog-$CMD" "${@}")
   else
     ( set -a; source .env 2> /dev/null; "$COG_DIRECTORY/bin/cog-$CMD" "${@}" )
   fi
