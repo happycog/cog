@@ -26,8 +26,10 @@ if [ ! -f "cog-$ARG_FILENAME" ]; then
   echo "[2/3] ⌨️  Making cog-$ARG_FILENAME Executable..."
   chmod u+x cog-$ARG_FILENAME
 
-  echo "#!/bin/bash" > cog-$ARG_FILENAME
-  echo "# Description: Add your descripton here" > cog-$ARG_FILENAME
+  echo "#!/bin/bash" >> cog-$ARG_FILENAME
+  echo "#################################################" >> cog-$ARG_FILENAME
+  echo "# Description: Add your descripton here" >> cog-$ARG_FILENAME
+  echo "#################################################" >> cog-$ARG_FILENAME
 else
   echo "⚠️  File already exist. Please try again"
   exit 0
