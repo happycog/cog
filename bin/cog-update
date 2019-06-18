@@ -1,10 +1,5 @@
 #!/bin/bash
-
-# cog update
-# This command will update all the this package to the latest version.
-for file in ./tools/*; do
-  source $file
-done
+# Description:      Update hc-cog to its latest version.
 
 echo -e "💻  Updating $(name)@$(version)..."
 

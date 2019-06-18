@@ -1,16 +1,53 @@
 #!/bin/bash
-
 # Set tabs space
 tabs 4
 
-# Color Format
-GREEN='\033[0;32m'
-YELLOW='\033[0;33m'
-BLUE='\033[0;34m'
-BOLD='\033[0;22m'
-NC='\033[0m' # No Color
+displayGlobalCommands() {
+  echo -e "${YELLOW}Global commands:${NC}"
+  echo ""
+  for file in $COG_DIRECTORY/bin/*; do
+    base_file=$(basename "$file");
+    # Ignore specific scripts
+    if [[ "$base_file" == "cog" ]] || [[ "$base_file" == "cog-help" ]] || [[ "$base_file" == "cog-ssl-check" ]]; then
+      continue
+    fi
+
+    COG_COMMAND=$(sed -e 's#.*-\(\)#\1#' <<< "$base_file");
+    COG_DESCRIPTION=$(sed -n 's/# Description: //p' $file);
+    # nameLength ${#COG_COMMAND};
+    echo -e "\t${GREEN}$COG_COMMAND${NC}        $COG_DESCRIPTION";
+    echo "";
+  done
+}
+
+displayProjectCommands() {
+  if [ -d "$PWD/bin" ]; then
+    echo -e "${YELLOW}Project commands:${NC}"
+    echo ""
+    for file in $PWD/bin/*; do
+      base_file=$(basename "$file");
+      COG_COMMAND=$(sed -e 's#.*-\(\)#\1#' <<< "$base_file");
+      COG_DESCRIPTION=$(sed -n 's/# Description: //p' $file);
+      echo -e "\t${GREEN}$COG_COMMAND${NC}        $COG_DESCRIPTION";
+      echo "";
+    done
+  fi
+}
+
+# Create even spacing for description
+nameLength() {
+  length=$1;
+
+  if  (( $length > $descriptionSpacing )); then 
+    descriptionSpacing=$length;
+  fi
+}
+
 
 # Default help screen
+echo ""
+echo -e "$(packageName) ${GREEN}$(packageVersion)${NC}";
+
 echo '
   MMMMMMMMMMMMMMM   MMMMMMMMMMMMMMM
     MMMMMMMMMMN       MMMMMMMMMMN
@@ -20,37 +57,9 @@ echo '
     MMMMMMMMMMN       MMMMMMMMMMN
   MMMMMMMMMMMMMMM   MMMMMMMMMMMMMMM
 '
-
-echo -e "${YELLOW}Usage:${NC}"
-echo -e "\tcommand [options] [arguments]"
+displayGlobalCommands;
 echo ""
-echo -e "${YELLOW}Available commands:${NC}"
-echo -e "\t${GREEN}go${NC}             Run the project at localhost:${WEBSERVER_PORT:-8000}."
-echo -e "\t ${BLUE}-h, --host${NC} <host> "
-echo -e "\t ${BLUE}-p, --port${NC} <port> "
-echo -e "\t ${BLUE}-d, --dir${NC} <directory> "
+displayProjectCommands;
 echo ""
-echo -e "\t${GREEN}make${NC}           Run the make command"
-echo -e "\t ${BLUE}:script${NC}       Pass in the name argument to create a new script"
-echo -e "\t ${BLUE}:env${NC}          Creates a .env file for your project"
-echo ""
-echo -e "\t${GREEN}serve${NC}          Create localhost tunnel with ngrok"
-echo ""
-echo -e "\t${GREEN}git-backup${NC}     Git clone a remote repository to a local folder and then checkout all remote branches so you have a complete backup"
-echo ""
-echo -e "\t${GREEN}compile${NC}        Run the default preprocessor task (gulp compile, grunt compile, etc.)."
-echo ""
-echo -e "\t${GREEN}convert${NC}        Converts any .mov and .mp4 files into .gif"
-echo ""
-echo -e "\t${GREEN}watch${NC}          Run the default preprocessor watch task (gulp watch, grunt watch, etc.)."
-echo ""
-echo -e "\t${GREEN}tag${NC}            Create git tags [${BLUE} major | minor | patch | push${NC}]"
-echo ""
-echo -e "\t${GREEN}update${NC}         Create git tags [${BLUE} major | minor | patch | push${NC}]"
-echo ""
-echo -e "\t${GREEN}ssl-check${NC}      Outputs info and runs some validity checks on a domain's SSL certificate"
 echo ""
 echo "Visit https://github.com/happycog/cog/ to learn more about cog."
-
-#TODO
-#Add abilty to search local bin for new commands
