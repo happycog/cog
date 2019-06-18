@@ -23,3 +23,8 @@ If you're using `Go` to write any commands, put your source `.go` file into the 
 ```
 yarn run build
 ```
+
+## CONTRIBUTIONS
+If you would like to contribute to this package, please create a new branch and submit a PR. 
+
+For local development, add `export PATH=$PATH:{path-to-this-repo}/bin`. Adding this to your path will force `cog` to use this repo as its main source and not the global package. 
