@@ -60,7 +60,7 @@ func main() {
 	}
 
 	if resp.StatusCode != 200 {
-		fmt.Printf("%s: Status code is %d instead of 200.\n\n", info("Potential Issue"), resp.StatusCode)
+		fmt.Printf("%s: Status code is %d instead of 200. Make sure to check the cert on the pre-redirect URL.\n\n", warn("Potential Issue"), resp.StatusCode)
 	}
 
 	CertInfo := GetCertInfo(resp)
