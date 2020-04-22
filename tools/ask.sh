@@ -20,3 +20,4 @@ ask() {
         esac
     done
 }
+export -f ask;

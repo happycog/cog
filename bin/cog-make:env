@@ -1,12 +1,12 @@
 #!/bin/bash
+# Description:    Create .env file
 
-# Variables
 ARG_FILENAME=$1
 
 if [ -f ".env" ]; then
     echo "⚠️  File already exist. Please try again"
     exit 0
 fi
-touch .env.example
-echo -e "APP_ENV=\nAPP_URL=\nDB_CONNECTION=\nDB_HOST=\nDB_PORT=\nDB_DATABASE=\nDB_USERNAME=\nDB_PASSWORD=\nDB_BACKUP_NAME=\nWEBSERVER_HOST=\nWEBSERVER_PORT=\nARG_DIR=\nS3_KEY=\nS3_SECRET=\nS3_REGION=\nS3_BUCKET=\nS3_BACKUP_BUCKET="> .env.example
+touch .env
+echo -e "APP_ENV=\nAPP_URL=\nDB_CONNECTION=\nDB_HOST=\nDB_PORT=\nDB_DATABASE=\nDB_USERNAME=\nDB_PASSWORD=\nDB_BACKUP_NAME=\nWEBSERVER_HOST=\nWEBSERVER_PORT=\nARG_DIR=\nS3_KEY=\nS3_SECRET=\nS3_REGION=\nS3_BUCKET=\nS3_BACKUP_BUCKET=" > .env
 echo '✨ .env.example was created. Rename the file to .env to use.'
