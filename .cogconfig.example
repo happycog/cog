@@ -1,0 +1,3 @@
+# Comma-separated list of Cog plugin directories where cog-{command} 
+# scripts can be found
+COG_PLUGIN_DIRECTORIES=
