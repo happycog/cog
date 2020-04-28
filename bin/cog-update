@@ -10,12 +10,6 @@ done
 
 echo -e "💻  Updating $(name)@$(version)..."
 
-# store the contents and path of .cogconfig
-cog_config=$(<$COG_PATH/.cogconfig)
-
-#yarn global remove hc-cog
-#yarn global add hc-cog@latest
-
-echo "$cog_config" >> "$COG_PATH/.cogconfig"
-
+yarn global remove hc-cog
+yarn global add hc-cog@latest
 

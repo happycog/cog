@@ -31,7 +31,7 @@ done
 shift
 
 # load up .cogconfig
-source $DIR/.cogconfig &>/dev/null
+source ~/.cogconfig &>/dev/null
 
 # split the .cogconfig variable by comma
 IFS=, read -a plugin_directories <<< "$COG_PLUGIN_DIRECTORIES"

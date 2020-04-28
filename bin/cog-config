@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "Create .cogconfig"
+
+if [[ ! -f ~/.cogconfig ]]; then
+	cp $COG_PATH/.cogconfig.example ~/.cogconfig
+else
+	echo ".cogconfig already exists in home directory"
+fi
+
+echo "Find your .cogconfig at: $HOME/.cogconfig"
