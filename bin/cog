@@ -47,7 +47,7 @@ BIN_DIRECTORIES+=( "$DIR/bin" )
 for bin_dir in "${BIN_DIRECTORIES[@]}"
 do
 	if [ -f ${bin_dir}/cog-${CMD} ]; then
-    	( set -a; source .env &> /dev/null; "${bin_dir}/cog-$CMD" "${@}")
+    	( set -a; source .env &> /dev/null; export COG_PATH=${DIR}; "${bin_dir}/cog-$CMD" "${@}")
     	break
     fi		
 done

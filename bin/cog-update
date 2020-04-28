@@ -1,13 +1,21 @@
 #!/bin/bash
 
 # cog update
-# This command will update all the this package to the latest version.
+# This command will update this package to the latest version.
+cd $COG_PATH
+
 for file in ./tools/*; do
   source $file
 done
 
 echo -e "💻  Updating $(name)@$(version)..."
 
-yarn global remove hc-cog
-yarn global add hc-cog@latest
+# store the contents and path of .cogconfig
+cog_config=$(<$COG_PATH/.cogconfig)
+
+#yarn global remove hc-cog
+#yarn global add hc-cog@latest
+
+echo "$cog_config" >> "$COG_PATH/.cogconfig"
+
 
