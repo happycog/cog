@@ -55,9 +55,6 @@ echo -e "\t${GREEN}ssl-check${NC}      Outputs info and runs some validity check
 echo ""
 #echo "Visit https://github.com/happycog/cog/ to learn more about cog."
 
-#TODO
-#Add abilty to search local bin for new commands
-
 # split the plugin directories variable by comma
 IFS=, read -a plugin_directories <<< "$COG_PLUGIN_DIRECTORIES"
 
