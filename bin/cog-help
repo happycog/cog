@@ -4,11 +4,11 @@
 tabs 4
 
 # Color Format
-GREEN='\033[0;32m'
-YELLOW='\033[0;33m'
-BLUE='\033[0;34m'
-BOLD='\033[0;22m'
-NC='\033[0m' # No Color
+#GREEN='\033[0;32m'
+#YELLOW='\033[0;33m'
+#BLUE='\033[0;34m'
+#BOLD='\033[0;22m'
+#NC='\033[0m' # No Color
 
 # Default help screen
 echo '
@@ -20,7 +20,8 @@ echo '
     MMMMMMMMMMN       MMMMMMMMMMN
   MMMMMMMMMMMMMMM   MMMMMMMMMMMMMMM
 '
-
+echo -e "${MAGENTA}Built-in Commands${NC}"
+echo ""
 echo -e "${YELLOW}Usage:${NC}"
 echo -e "\tcommand [options] [arguments]"
 echo ""
@@ -40,6 +41,8 @@ echo -e "\t${GREEN}git-backup${NC}     Git clone a remote repository to a local 
 echo ""
 echo -e "\t${GREEN}compile${NC}        Run the default preprocessor task (gulp compile, grunt compile, etc.)."
 echo ""
+echo -e "\t${GREEN}config${NC}         Create the ~/.cogconfig file if it does not exists."
+echo ""
 echo -e "\t${GREEN}convert${NC}        Converts any .mov and .mp4 files into .gif"
 echo ""
 echo -e "\t${GREEN}watch${NC}          Run the default preprocessor watch task (gulp watch, grunt watch, etc.)."
@@ -50,7 +53,17 @@ echo -e "\t${GREEN}update${NC}         Create git tags [${BLUE} major | minor | 
 echo ""
 echo -e "\t${GREEN}ssl-check${NC}      Outputs info and runs some validity checks on a domain's SSL certificate"
 echo ""
-echo "Visit https://github.com/happycog/cog/ to learn more about cog."
+#echo "Visit https://github.com/happycog/cog/ to learn more about cog."
 
 #TODO
 #Add abilty to search local bin for new commands
+
+# split the plugin directories variable by comma
+IFS=, read -a plugin_directories <<< "$COG_PLUGIN_DIRECTORIES"
+
+for bin_dir in "${plugin_directories[@]}"
+do
+	if [ -f ${bin_dir}/.cog-help ]; then
+    	( set -a; source .env &> /dev/null; "${bin_dir}/.cog-help" "${@}")
+    fi
+done

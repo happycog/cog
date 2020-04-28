@@ -10,4 +10,4 @@ else
 fi
 
 echo ""
-echo "Find your .cogconfig at 👉 $HOME/.cogconfig"
+echo -e "Find your ${GREEN}.cogconfig${NC} at 👉 ${MAGENTA}$HOME/.cogconfig${NC}"
