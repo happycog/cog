@@ -61,9 +61,15 @@ echo ""
 # split the plugin directories variable by comma
 IFS=, read -a plugin_directories <<< "$COG_PLUGIN_DIRECTORIES"
 
+# run plugin directory help commands
 for bin_dir in "${plugin_directories[@]}"
 do
 	if [ -f ${bin_dir}/.cog-help ]; then
     	( set -a; source .env &> /dev/null; "${bin_dir}/.cog-help" "${@}")
     fi
 done
+
+# run local help command
+if [ -f ./bin/.cog-help ]; then
+   	( set -a; source .env &> /dev/null; "./bin/.cog-help" "${@}")
+fi
