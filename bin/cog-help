@@ -19,8 +19,8 @@ echo -e "${YELLOW}
  MM      MM   ,pm9MM   MM    M8  MM    M8   VA ,V      MM.        8M     M8 WmmmP'   
  MM      MM  8M   MM   MM   ,AP  MM   ,AP    VVV       'Mb.     , YA.   ,A9 M        
 JMML    JMML 'Moo9^Yo. MMbmmd'   MMbmmd'     ,V          ''bmmmd'  'Ybmd9'  YMMMMM  
-                        MM        MM         ,V                            6'    d 
-                       JMML      JMML      OOb                              Ybmmd'    
+                       MM        MM         ,V                             6'    d 
+                      JMML      JMML      OOb                               Ybmmd'    
 ${NC}"
 
 echo "Cog is a bash script that helps automate the development workflow"                                                                                                 
