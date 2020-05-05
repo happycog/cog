@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "⚙️  Create .cogconfig"
+
+if [[ ! -f ~/.cogconfig ]]; then
+	cp $COG_PATH/.cogconfig.example ~/.cogconfig
+else
+	echo "Oops .cogconfig already exists in home directory!"
+fi
+
+echo ""
+echo -e "Find your ${GREEN}.cogconfig${NC} at 👉 ${MAGENTA}$HOME/.cogconfig${NC}"

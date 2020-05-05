@@ -4,27 +4,32 @@
 tabs 4
 
 # Color Format
-GREEN='\033[0;32m'
-YELLOW='\033[0;33m'
-BLUE='\033[0;34m'
-BOLD='\033[0;22m'
-NC='\033[0m' # No Color
+#GREEN='\033[0;32m'
+#YELLOW='\033[0;33m'
+#BLUE='\033[0;34m'
+#BOLD='\033[0;22m'
+#NC='\033[0m' # No Color
 
 # Default help screen
-echo '
-  MMMMMMMMMMMMMMM   MMMMMMMMMMMMMMM
-    MMMMMMMMMMN       MMMMMMMMMMN
-     NMMMMMMMM    MMMMMMMMMMMMMM
-     NMMMMMMMM  MMMMMMMMMMMMMMMM
-     NMMMMMMMM    MMMMMMMMMMMMMM
-    MMMMMMMMMMN       MMMMMMMMMMN
-  MMMMMMMMMMMMMMM   MMMMMMMMMMMMMMM
-'
+echo -e "${YELLOW}
+7MMF    7MMF                                             .g8'''bgd                    
+ MM      MM                                            .dP'     'M                    
+ MM      MM   ,6'Yb. '7MMpdMAo.'7MMpdMAo.'7M'   'MF'   dM'         ,pW'Wq.  .P'Ybm 
+ MMmmmmmmMM  8)   MM   MM   'Wb  MM   'Wb  VA   ,V     MM         6'    'Wb MI  I8   
+ MM      MM   ,pm9MM   MM    M8  MM    M8   VA ,V      MM.        8M     M8 WmmmP'   
+ MM      MM  8M   MM   MM   ,AP  MM   ,AP    VVV       'Mb.     , YA.   ,A9 M        
+JMML    JMML 'Moo9^Yo. MMbmmd'   MMbmmd'     ,V          ''bmmmd'  'Ybmd9'  YMMMMM  
+                       MM        MM         ,V                             6'    d 
+                      JMML      JMML      OOb                               Ybmmd'    
+${NC}"
 
+echo "Cog is a bash script that helps automate the development workflow"                                                                                                 
+echo ""
 echo -e "${YELLOW}Usage:${NC}"
 echo -e "\tcommand [options] [arguments]"
 echo ""
-echo -e "${YELLOW}Available commands:${NC}"
+echo -e "⚙️  ${MAGENTA}Built-in Commands:${NC}"
+echo ""
 echo -e "\t${GREEN}go${NC}             Run the project at localhost:${WEBSERVER_PORT:-8000}."
 echo -e "\t ${BLUE}-h, --host${NC} <host> "
 echo -e "\t ${BLUE}-p, --port${NC} <port> "
@@ -40,6 +45,8 @@ echo -e "\t${GREEN}git-backup${NC}     Git clone a remote repository to a local 
 echo ""
 echo -e "\t${GREEN}compile${NC}        Run the default preprocessor task (gulp compile, grunt compile, etc.)."
 echo ""
+echo -e "\t${GREEN}config${NC}         Create the ~/.cogconfig file if it does not exists."
+echo ""
 echo -e "\t${GREEN}convert${NC}        Converts any .mov and .mp4 files into .gif"
 echo ""
 echo -e "\t${GREEN}watch${NC}          Run the default preprocessor watch task (gulp watch, grunt watch, etc.)."
@@ -50,7 +57,20 @@ echo -e "\t${GREEN}update${NC}         Create git tags [${BLUE} major | minor | 
 echo ""
 echo -e "\t${GREEN}ssl-check${NC}      Outputs info and runs some validity checks on a domain's SSL certificate"
 echo ""
-echo "Visit https://github.com/happycog/cog/ to learn more about cog."
+#echo "Visit https://github.com/happycog/cog/ to learn more about cog."
 
-#TODO
-#Add abilty to search local bin for new commands
+# split the plugin directories variable by comma
+IFS=, read -a plugin_directories <<< "$COG_PLUGIN_DIRECTORIES"
+
+# run plugin directory help commands
+for bin_dir in "${plugin_directories[@]}"
+do
+	if [ -f ${bin_dir}/.cog-help ]; then
+    	( set -a; source .env &> /dev/null; "${bin_dir}/.cog-help" "${@}")
+    fi
+done
+
+# run local help command
+if [ -f ./bin/.cog-help ]; then
+   	( set -a; source .env &> /dev/null; "./bin/.cog-help" "${@}")
+fi

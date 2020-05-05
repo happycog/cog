@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # cog update
-# This command will update all the this package to the latest version.
+# This command will update this package to the latest version.
+cd $COG_PATH
+
 for file in ./tools/*; do
   source $file
 done

@@ -1,11 +1,27 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -o pipefail
+
 CMD=${1:-help}
 
+
+# function to get the directory containing cog
+get_script_dir () {
+     SOURCE="${BASH_SOURCE[0]}"
+     # While $SOURCE is a symlink, resolve it
+     while [ -h "$SOURCE" ]; do
+          DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+          SOURCE="$( readlink "$SOURCE" )"
+          # If $SOURCE was a relative symlink (so no "/" as prefix, need to resolve it relative to the symlink base directory
+          [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
+     done
+     DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+     echo "$DIR"
+}
+
 # Yarn global adds the cog binary to your $PATH through a bunch of 
-# symlinks. `readlink -f` isn't available on Mac, so this uses 
-# Python to grab the fully resolved path of `cog` and then two
-# `dirname`s to back out to the true installed repo directory.
-DIR=$(dirname $(dirname $(python -c "import os; print(os.path.realpath('${BASH_SOURCE[0]}'))")))
+# symlinks. So this uses the get_script_dir function to find the 
+# directory containing the cog script and then navigates up the tree
+DIR=$(dirname $(get_script_dir))
 
 # Include all scripts inside the tools folder
 for file in $DIR/tools/*; do
@@ -15,11 +31,30 @@ done
 # Drop next argument
 shift
 
-# Check if /bin exist in current directory and automaticlly include the .env file
-if [ -f "./bin/cog-$CMD" ]; then
-    # Overwrite script exist. Run this
-    ( set -a; source .env 2> /dev/null; "./bin/cog-$CMD" "${@}")
-  else
-    # Execute default scripts
-    ( set -a; source .env 2> /dev/null; "$DIR/bin/cog-$CMD" "${@}" )
-fi
+# load up .cogconfig
+source ~/.cogconfig &>/dev/null
+
+# split the .cogconfig variable by comma
+IFS=, read -a plugin_directories <<< "$COG_PLUGIN_DIRECTORIES"
+
+# create an array of directories to search
+# start with ./bin, then any plugin directories
+# and last the cog directory
+BIN_DIRECTORIES=()
+BIN_DIRECTORIES+=( "./bin" )
+BIN_DIRECTORIES+=( ${plugin_directories[@]} )
+BIN_DIRECTORIES+=( "$DIR/bin" )
+
+# Export Variables for use in cog commands later
+
+# Cog paths
+export COG_PLUGIN_DIRECTORIES=${COG_PLUGIN_DIRECTORIES}
+export COG_PATH=${DIR}
+
+for bin_dir in "${BIN_DIRECTORIES[@]}"
+do
+	if [ -f ${bin_dir}/cog-${CMD} ]; then
+    	( set -a; source .env &> /dev/null; "${bin_dir}/cog-$CMD" "${@}")
+    	break
+    fi		
+done

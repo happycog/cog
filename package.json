@@ -1,6 +1,6 @@
 {
   "name": "hc-cog",
-  "version": "0.7.6",
+  "version": "0.8",
   "description": "Happy Cog bash script that helps automate the development workflow",
   "main": "index.js",
   "scripts": {
@@ -32,6 +32,10 @@
     {
       "name": "Matt Weinberg",
       "url": "https://github.com/mrw"
+    },
+    {
+      "name": "Jeremy Gimbel",
+      "url": "https://github.com/dreadfullyposh"
     }
   ],
   "homepage": "https://github.com/happycog/cog#readme",
