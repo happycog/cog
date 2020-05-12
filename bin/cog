@@ -18,21 +18,40 @@ get_script_dir () {
      echo "$DIR"
 }
 
-# Yarn global adds the cog binary to your $PATH through a bunch of 
-# symlinks. So this uses the get_script_dir function to find the 
+# Yarn global adds the cog binary to your $PATH through a bunch of
+# symlinks. So this uses the get_script_dir function to find the
 # directory containing the cog script and then navigates up the tree
-DIR=$(dirname $(get_script_dir))
+SCRIPT_DIR=$(dirname $(get_script_dir))
+
+# function to get the project directory by scanning up the directory
+# hierarchy looking for a bin folder or a .cogconfig file
+get_project_dir () {
+    CHECK=$(pwd)
+    while [ -d "$CHECK" ] && [ "$CHECK" != "/" ]; do
+        if [ -f "$CHECK/.cogfile" ]; then
+            echo $CHECK
+            break
+        fi
+        if [ -d "$CHECK/bin" ]; then
+            echo "$CHECK"
+            break
+        fi
+        CHECK="$(dirname "$CHECK")"
+    done
+}
+PROJECT_DIR=$(get_project_dir)
 
 # Include all scripts inside the tools folder
-for file in $DIR/tools/*; do
+for file in $SCRIPT_DIR/tools/*; do
   source $file
 done
 
 # Drop next argument
 shift
 
-# load up .cogconfig
+# load up user cog config first and then allow a project cogconfig to override
 source ~/.cogconfig &>/dev/null
+source "$PROJECT_DIR/.cogconfig" &>/dev/null
 
 # split the .cogconfig variable by comma
 IFS=, read -a plugin_directories <<< "$COG_PLUGIN_DIRECTORIES"
@@ -43,7 +62,8 @@ IFS=, read -a plugin_directories <<< "$COG_PLUGIN_DIRECTORIES"
 BIN_DIRECTORIES=()
 BIN_DIRECTORIES+=( "./bin" )
 BIN_DIRECTORIES+=( ${plugin_directories[@]} )
-BIN_DIRECTORIES+=( "$DIR/bin" )
+BIN_DIRECTORIES+=( "$SCRIPT_DIR/bin" )
+BIN_DIRECTORIES+=( "$PROJECT_DIR/bin" )
 
 # Export Variables for use in cog commands later
 
@@ -54,7 +74,7 @@ export COG_PATH=${DIR}
 for bin_dir in "${BIN_DIRECTORIES[@]}"
 do
 	if [ -f ${bin_dir}/cog-${CMD} ]; then
-    	( set -a; source .env &> /dev/null; "${bin_dir}/cog-$CMD" "${@}")
+    	( set -a; source .env &> /dev/null; source "$PROJECT_DIR/.cogconfig" &>/dev/null;  "${bin_dir}/cog-$CMD" "${@}")
     	break
     fi		
 done

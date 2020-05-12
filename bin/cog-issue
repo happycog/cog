@@ -1,0 +1,13 @@
+#!/bin/bash
+set -e
+
+if [ "$ISSUE_URL" == "" ]; then
+    echo "No ISSUE_URL set!"
+    echo "Add an ISSUE_URL variable to your project's .cogconfig file. For example,"
+    echo ""
+    echo "    ISSUE_URL=https://github.com/org/repo/issues/$1"
+    echo ""
+    exit
+fi
+
+open $ISSUE_URL
