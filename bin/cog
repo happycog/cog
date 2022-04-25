@@ -51,10 +51,22 @@ BIN_DIRECTORIES+=( "$DIR/bin" )
 export COG_PLUGIN_DIRECTORIES=${COG_PLUGIN_DIRECTORIES}
 export COG_PATH=${DIR}
 
+COMMAND_FOUND=false
 for bin_dir in "${BIN_DIRECTORIES[@]}"
 do
 	if [ -f ${bin_dir}/cog-${CMD} ]; then
+      COMMAND_FOUND=true
     	( set -a; source .env &> /dev/null; "${bin_dir}/cog-$CMD" "${@}")
     	break
-    fi		
+    fi
 done
+
+# Notify if no matching command was found in any of the bin directories
+if [ !$COMMAND_FOUND ]; then
+  echo -e "${RED}No \`${CMD}\` command found in any Cog directories:${NC}"
+  for bin_dir in "${BIN_DIRECTORIES[@]}"
+  do
+    echo -e "${RED} - ${bin_dir}"
+  done
+  exit 1
+fi
