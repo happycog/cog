@@ -1,6 +1,6 @@
 {
   "name": "hc-cog",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "description": "Happy Cog bash script that helps automate the development workflow",
   "main": "index.js",
   "scripts": {
@@ -40,6 +40,10 @@
     {
       "name": "Kyle Cotter",
       "url": "https://github.com/kylecotter"
+    },
+    {
+      "name": "Ben Carr",
+      "url": "https://github.com/bencarr"
     }
   ],
   "homepage": "https://github.com/happycog/cog#readme",
