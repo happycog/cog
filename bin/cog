@@ -6,16 +6,16 @@ CMD=${1:-help}
 
 # function to get the directory containing cog
 get_script_dir () {
-     SOURCE="${BASH_SOURCE[0]}"
-     # While $SOURCE is a symlink, resolve it
-     while [ -h "$SOURCE" ]; do
-          DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
-          SOURCE="$( readlink "$SOURCE" )"
-          # If $SOURCE was a relative symlink (so no "/" as prefix, need to resolve it relative to the symlink base directory
-          [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
-     done
-     DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
-     echo "$DIR"
+    SOURCE="${BASH_SOURCE[0]}"
+    # While $SOURCE is a symlink, resolve it
+    while [ -h "$SOURCE" ]; do
+        DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+        SOURCE="$( readlink "$SOURCE" )"
+        # If $SOURCE was a relative symlink (so no "/" as prefix, need to resolve it relative to the symlink base directory
+        [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
+    done
+    DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+    echo "$DIR"
 }
 
 # Yarn global adds the cog binary to your $PATH through a bunch of 
@@ -25,7 +25,7 @@ DIR=$(dirname $(get_script_dir))
 
 # Include all scripts inside the tools folder
 for file in $DIR/tools/*; do
-  source $file
+    source $file
 done
 
 # Drop next argument
@@ -51,10 +51,22 @@ BIN_DIRECTORIES+=( "$DIR/bin" )
 export COG_PLUGIN_DIRECTORIES=${COG_PLUGIN_DIRECTORIES}
 export COG_PATH=${DIR}
 
+COMMAND_FOUND=false
 for bin_dir in "${BIN_DIRECTORIES[@]}"
 do
-	if [ -f ${bin_dir}/cog-${CMD} ]; then
-    	( set -a; source .env &> /dev/null; "${bin_dir}/cog-$CMD" "${@}")
-    	break
-    fi		
+    if [ -f ${bin_dir}/cog-${CMD} ]; then
+        COMMAND_FOUND=true
+        ( set -a; source .env &> /dev/null; "${bin_dir}/cog-$CMD" "${@}")
+        break
+    fi
 done
+
+# Notify if no matching command was found in any of the bin directories
+if [ !$COMMAND_FOUND ]; then
+    echo -e "${RED}No \`${CMD}\` command found in any Cog directories:${NC}"
+    for bin_dir in "${BIN_DIRECTORIES[@]}"
+    do
+        echo -e "${RED} - $(cd $bin_dir; pwd)${NC}"
+    done
+    exit 1
+fi
