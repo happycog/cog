@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -o pipefail
 
 CMD=${1:-help}
 
@@ -62,7 +62,7 @@ do
 done
 
 # Notify if no matching command was found in any of the bin directories
-if [ !$COMMAND_FOUND ]; then
+if [ $COMMAND_FOUND = false ]; then
     echo -e "${RED}No \`${CMD}\` command found in any Cog directories:${NC}"
     for bin_dir in "${BIN_DIRECTORIES[@]}"
     do
